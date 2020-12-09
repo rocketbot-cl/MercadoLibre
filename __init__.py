@@ -24,6 +24,8 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 
 """
 import json
+from MercadoLibre import MercadoLibre
+
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + "modules" + os.sep + "MercadoLibre" + os.sep + "libs" + os.sep
@@ -34,5 +36,14 @@ sys.path.append(cur_path)
 
 module = GetParams("module")
 
+global mercado_libre
+
 if module == "setCredentials":
-    print("Hola!")
+    client_secret = GetParams("client_secret")
+    client_id = GetParams("client_id")
+    redirect_uri = GetParams("redirect_uri")
+    code = GetParams("code")
+
+    mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code)
+    if mercado_libre.access_token is None:
+        mercado_libre.get_access_token()
