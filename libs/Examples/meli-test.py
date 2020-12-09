@@ -17,8 +17,8 @@ class MercadoLibre:
     APP_ID = 7480524387124622
     CLIENT_SECRET = 'T2NFwv5Ra2cnWEEy3jRxh2OBEXlJfSu4'
     REDIRECT_URI = "http://localhost:5001/login"
-    CODE = 'TG-5fca6192004135000646c518-386738209'
-    ACCESS_TOKEN = 'APP_USR-7480524387124622-120416-99415cd9b0bb1d00eb67553dce67a5f8-386738209'
+    CODE = 'TG-5fd0ef5e80e35b000675d315-386738209'
+    #ACCESS_TOKEN = 'APP_USR-7480524387124622-120416-99415cd9b0bb1d00eb67553dce67a5f8-386738209'
     SELLER_ID = 386738209
 """
  Get Code: https://auth.mercadolibre.com/authorization?response_type=code&client_id={APP_ID}&redirect_uri={REDIRECT_URI}
@@ -28,7 +28,7 @@ class MercadoLibre:
 ml = MercadoLibre()
 
 def get_code(client_id, redirect_uri):
-    url_code = "https://auth.mercadolibre.com/authorization?response_type=code&client_id="+client_id+"&redirect_uri="+redirect_uri
+    url_code = "https://auth.mercadolibre.com/authorization?response_type=code&client_id={}&redirect_uri={}".format(client_id, redirect_uri)
     webbrowser.open(url_code, new=2)
     
 
@@ -76,5 +76,5 @@ if __name__ == "__main__":
         "get_orders":"orders/search?seller="
     }
     #MLC564078057
-    get_resource(resource["get_orders"] + str(ml.SELLER_ID))
-    # get_access_token()
+    #get_resource(resource["get_orders"] + str(ml.SELLER_ID))
+    get_access_token()

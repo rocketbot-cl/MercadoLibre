@@ -62,10 +62,12 @@ if __name__ == '__main__':
     APP_ID = 7480524387124622
     CLIENT_SECRET = 'T2NFwv5Ra2cnWEEy3jRxh2OBEXlJfSu4'
     REDIRECT_URI = "http://localhost:5001/login"
-    CODE = 'TG-5fce383f738cf10006c5ef33-386738209'
-    access_token = "APP_USR-7480524387124622-120714-e0545839d47e481354196a1ed64c39e5-386738209"
+    CODE = 'TG-5fd0d26e8ed7d70006de3d99-386738209'
+    #access_token = "APP_USR-7480524387124622-120714-e0545839d47e481354196a1ed64c39e5-386738209"
+
+    print(type(APP_ID))
 
     ml = MercadoLibre(CLIENT_SECRET, REDIRECT_URI, APP_ID, CODE)
-    # ml.get_access_token()
-    ml.access_token = access_token
-    ml.get_resource("users/me")
+    ml.get_access_token()
+    #ml.access_token = access_token
+    #ml.get_resource("users/me")
