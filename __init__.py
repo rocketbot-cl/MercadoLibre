@@ -63,3 +63,12 @@ if module == "getCode":
         PrintException()
         raise e
 
+if module == "searchAllOrders":
+    result = GetParams("result")
+    try:
+        api_response = mercado_libre.get_resource("orders/search?seller="+str(mercado_libre.user_id))
+        SetVar(result, api_response)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
