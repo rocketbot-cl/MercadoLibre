@@ -42,10 +42,12 @@ if module == "setCredentials":
     client_id = int(client_id)
     redirect_uri = GetParams("redirect_uri")
     code = GetParams("code")
+    access_token = GetParams("access_token")
     try:
-        mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code)
-        if mercado_libre.access_token is None:
-            mercado_libre.get_access_token()
+        mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code, access_token)
+        if mercado_libre.access_token == '':
+            access_token_new = mercado_libre.get_access_token()
+            SetVar(access_token, access_token_new)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()

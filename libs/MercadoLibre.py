@@ -4,7 +4,7 @@ from meli.rest import ApiException
 
 class MercadoLibre:
 
-    def __init__(self, client_secret, redirect_uri, client_id, code):
+    def __init__(self, client_secret, redirect_uri, client_id, code, access_token=''):
         self.CLIENT_SECRET = client_secret
         self.REDIRECT_URI = redirect_uri
         self.CLIENT_ID = client_id
@@ -12,7 +12,7 @@ class MercadoLibre:
         self.configuration = meli.Configuration(
             host="https://api.mercadolibre.com"
         )
-        self.access_token = None
+        self.access_token = access_token
         self.refresh_token = ''
         self.user_id = None
 
@@ -34,7 +34,8 @@ class MercadoLibre:
             self.refresh_token = api_response["refresh_token"]
             self.user_id = api_response["user_id"]
             print(api_response)
-            return api_response
+            return api_response["access_token"]
+            #return api_response
         except ApiException as exception:
             print(f"Exception when calling OAuth20Api->get_token: {exception}\n")
 
