@@ -89,20 +89,6 @@
             },
             "id": "code",
             "css": "col-md-12"
-          },
-          {
-            "type": "input",
-            "placeholder": "APP-USR4j5n34k5j34bn",
-            "title": {
-              "es": "Access Token",
-              "en": "Access Token"
-            },
-            "help": {
-              "es": "Nombre de variable sin {}",
-              "en": "Variable name without {}"
-            },
-            "id": "access_token",
-            "css": "col-md-12"
           }
         ]
       },
@@ -194,6 +180,29 @@
       "form": {
         "css": "modal-lg",
         "inputs": [
+           {
+            "type": "select",
+            "placeholder": {
+              "es": "Filtro",
+              "en": "Filter"
+            },
+            "title": {
+              "es": "Filtro",
+              "en": "Filter"
+            },
+            "options": [
+              {
+                "title": "Ascendente",
+                "value": "date_asc"
+              },
+              {
+                "title": "Descendente",
+                "value": "date_desc"
+              }
+            ],
+            "id": "filter",
+            "css": "col-md-6"
+          },
           {
             "type": "input",
             "placeholder": "result",

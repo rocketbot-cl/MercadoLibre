@@ -31,6 +31,7 @@ sys.path.append(cur_path)
 """
 from MercadoLibre import MercadoLibre
 import webbrowser
+import json
 
 module = GetParams("module")
 
@@ -43,11 +44,22 @@ if module == "setCredentials":
     redirect_uri = GetParams("redirect_uri")
     code = GetParams("code")
     access_token = GetParams("access_token")
+    credentials_filename = 'credentials.json'
+    file_credentials = base_path + "modules" + os.sep + "MercadoLibre" + os.sep + credentials_filename
     try:
-        mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code, access_token)
-        if mercado_libre.access_token == '':
-            access_token_new = mercado_libre.get_access_token()
-            SetVar(access_token, access_token_new)
+        try:
+            with open(file_credentials) as json_file:
+                data = json.load(json_file)
+            refresh_token = data['refresh_token']
+            mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code, refresh_token=refresh_token)
+            grant_type = 'refresh_token'
+            mercado_libre.get_access_token(file_credentials, grant_type=grant_type)
+        except IOError:
+            mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code)
+            mercado_libre.get_access_token(file_credentials)
+        # if mercado_libre.access_token == '':
+        #     access_token_new = mercado_libre.get_access_token()
+        #     SetVar(access_token, access_token_new)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
@@ -67,8 +79,15 @@ if module == "getCode":
 
 if module == "searchAllOrders":
     result = GetParams("result")
+    filter = GetParams("filter")
+    print(filter)
     try:
-        api_response = mercado_libre.get_resource("orders/search?seller="+str(mercado_libre.user_id))
+        #           orders/search?seller=$SELLER_ID&order.status=paid&sort=date_desc
+        resource = "orders/search?seller=" + str(mercado_libre.user_id)
+        if filter:
+            resource = resource + "&order.status=paid&sort={}".format(filter)
+        print(resource)
+        api_response = mercado_libre.get_resource(resource)
         SetVar(result, api_response)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")

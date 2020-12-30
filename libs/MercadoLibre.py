@@ -1,10 +1,12 @@
 import meli
 from meli.rest import ApiException
-
+import json
+import os
+from pathlib import Path
 
 class MercadoLibre:
 
-    def __init__(self, client_secret, redirect_uri, client_id, code, access_token=''):
+    def __init__(self, client_secret, redirect_uri, client_id, code, access_token='', refresh_token=''):
         self.CLIENT_SECRET = client_secret
         self.REDIRECT_URI = redirect_uri
         self.CLIENT_ID = client_id
@@ -13,10 +15,10 @@ class MercadoLibre:
             host="https://api.mercadolibre.com"
         )
         self.access_token = access_token
-        self.refresh_token = ''
+        self.refresh_token = refresh_token
         self.user_id = None
 
-    def get_access_token(self, grant_type='authorization_code'):
+    def get_access_token(self, file_credentials,grant_type='authorization_code'):
 
         with meli.ApiClient() as client:
             api_instance = meli.OAuth20Api(client)
@@ -33,11 +35,19 @@ class MercadoLibre:
             self.access_token = api_response["access_token"]
             self.refresh_token = api_response["refresh_token"]
             self.user_id = api_response["user_id"]
+            self.write_credentials(api_response, file_credentials)
             print(api_response)
-            return api_response["access_token"]
-            #return api_response
+            return api_response
+            # print()
         except ApiException as exception:
             print(f"Exception when calling OAuth20Api->get_token: {exception}\n")
+
+    def get_refresh_token(self):
+        print()
+
+    def write_credentials(self, credentials, file_credentials):
+        with open(file_credentials, 'w') as outfile:
+            json.dump(credentials, outfile)
 
     def get_resource(self, resource):
         # Enter a context with an instance of the API client
@@ -57,5 +67,3 @@ class MercadoLibre:
             return results
         except ApiException as e:
             print("Exception when calling RestClientApi->resource_get: %s\n" % e)
-
-
