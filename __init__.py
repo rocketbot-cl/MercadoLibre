@@ -80,15 +80,34 @@ if module == "getCode":
 if module == "searchAllOrders":
     result = GetParams("result")
     filter = GetParams("filter")
-    print(filter)
     try:
-        #           orders/search?seller=$SELLER_ID&order.status=paid&sort=date_desc
         resource = "orders/search?seller=" + str(mercado_libre.user_id)
         if filter:
             resource = resource + "&order.status=paid&sort={}".format(filter)
-        print(resource)
         api_response = mercado_libre.get_resource(resource)
         SetVar(result, api_response)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "uploadInvoice":
+    pack_id = GetParams("pack_id")
+    invoice_path = GetParams("invoice_path")
+    try:
+        mercado_libre.upload_invoice(pack_id, invoice_path)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "getShippingDetail":
+    shipping_id = GetParams("shipping_id")
+    result = GetParams("result")
+    try:
+        resource_shipping = "shipments/" + shipping_id
+        shipping_details = mercado_libre.get_resource(resource_shipping)
+        SetVar(result, shipping_details)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()

@@ -6,10 +6,16 @@ Module to work with MercadoLibre features
     <li>Get Code</li>
     <li>Set Credentials</li>
     <li>Search All Orders</li>
+    <li>Upload invoice</li>
+    <li>Get shipping details</li>
 </ul>
 Robot example
 
 ![alt text](https://i.imgur.com/vtwhNII.png)
+
+## Updates
+12-1-2021 - Get shipping details
+8-1-2021 - Upload invoice
 
 <h2>License</h2>
 
