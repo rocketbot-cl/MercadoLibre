@@ -14,8 +14,8 @@ Robot example
 ![alt text](https://i.imgur.com/vtwhNII.png)
 
 ## Updates
-12-1-2021 - Get shipping details
-8-1-2021 - Upload invoice
+- 12-1-2021 - Get shipping details
+- 8-1-2021 - Upload invoice
 
 <h2>License</h2>
 
