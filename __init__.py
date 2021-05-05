@@ -92,7 +92,7 @@ if module == "searchAllOrders":
         raise e
 
 if module == "uploadInvoice":
-    pack_id = GetParams("pack_id")
+    pack_id = str(GetParams("pack_id"))
     invoice_path = GetParams("invoice_path")
     try:
         mercado_libre.upload_invoice(pack_id, invoice_path)

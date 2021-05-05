@@ -1,8 +1,11 @@
 import meli
 from meli.rest import ApiException
 import json
+import requests
+from requests.structures import CaseInsensitiveDict
 import os
 from pathlib import Path
+
 
 class MercadoLibre:
 
@@ -67,3 +70,13 @@ class MercadoLibre:
             return results
         except ApiException as e:
             print("Exception when calling RestClientApi->resource_get: %s\n" % e)
+
+    def upload_invoice(self, pack_id, path_file):
+        # pack_id = 4208464169
+        url = "https://api.mercadolibre.com/packs/{pack_id}/fiscal_documents".format(pack_id=pack_id)
+        headers = CaseInsensitiveDict()
+        # access_token = 'APP_USR-7480524387124622-010713-4f28098e6276386b2220a0e4c0130897-386738209'
+        headers["Authorization"] = "Bearer {access_token}".format(access_token=self.access_token)
+        files = {'fiscal_document': open(path_file, 'rb')}
+        resp = requests.post(url, files=files, headers=headers)
+        print(resp.text)
