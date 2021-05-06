@@ -41,7 +41,6 @@ class MercadoLibre:
             self.write_credentials(api_response, file_credentials)
             print(api_response)
             return api_response
-            # print()
         except ApiException as exception:
             print(f"Exception when calling OAuth20Api->get_token: {exception}\n")
 
@@ -63,20 +62,26 @@ class MercadoLibre:
             access_token = self.access_token  # Your access token.
         try:
             # Resource path GET
-            print(resource)
             api_response = api_instance.resource_get(resource, access_token)
             results = api_response
-            print(results)
             return results
         except ApiException as e:
             print("Exception when calling RestClientApi->resource_get: %s\n" % e)
 
     def upload_invoice(self, pack_id, path_file):
-        # pack_id = 4208464169
         url = "https://api.mercadolibre.com/packs/{pack_id}/fiscal_documents".format(pack_id=pack_id)
         headers = CaseInsensitiveDict()
-        # access_token = 'APP_USR-7480524387124622-010713-4f28098e6276386b2220a0e4c0130897-386738209'
         headers["Authorization"] = "Bearer {access_token}".format(access_token=self.access_token)
         files = {'fiscal_document': open(path_file, 'rb')}
         resp = requests.post(url, files=files, headers=headers)
         print(resp.text)
+    
+    def get_billing_info(self, order_id):
+        url = "https://api.mercadolibre.com/orders/{order_id}/billing_info".format(order_id=str(order_id))
+        headers = CaseInsensitiveDict()
+        headers["Authorization"] = "Bearer {access_token}".format(access_token=self.access_token)
+        resp = requests.get(url, headers=headers)
+        resp_json = resp.text
+        return resp_json
+
+

@@ -57,9 +57,6 @@ if module == "setCredentials":
         except IOError:
             mercado_libre = MercadoLibre(client_secret, redirect_uri, client_id, code)
             mercado_libre.get_access_token(file_credentials)
-        # if mercado_libre.access_token == '':
-        #     access_token_new = mercado_libre.get_access_token()
-        #     SetVar(access_token, access_token_new)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
@@ -108,6 +105,17 @@ if module == "getShippingDetail":
         resource_shipping = "shipments/" + shipping_id
         shipping_details = mercado_libre.get_resource(resource_shipping)
         SetVar(result, shipping_details)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "get_billing_info":
+    order_id = GetParams("order_id")
+    res = GetParams("result")
+    try:
+        billing_info = mercado_libre.get_billing_info(order_id)
+        SetVar(res, billing_info)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
