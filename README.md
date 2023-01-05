@@ -1,28 +1,49 @@
 # MercadoLibre
-Module to work with MercadoLibre features
+  
+Module to work with MercadoLibre functions in Rocketbot  
 
-## Commands
-<ul class="commands_readme">
-    <li>Get Code</li>
-    <li>Set Credentials</li>
-    <li>Search All Orders</li>
-    <li>Upload invoice</li>
-    <li>Get shipping details</li>
-    <li>Get billing info</li>
-</ul>
-Robot example
+*Read this in other languages: [English](README.md), [Español](README.es.md).*
 
-![alt text](https://i.imgur.com/vtwhNII.png)
+## How to install this module
+  
+__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
-## Updates
-- 6-5-2021 - Get billing info
-- 12-1-2021 - Get shipping details
-- 8-1-2021 - Upload invoice
 
-<h2>License</h2>
 
-<p><a href="http://badges.mit-license.org" rel="nofollow"><img src="https://camo.githubusercontent.com/107590fac8cbd65071396bb4d04040f76cde5bde/687474703a2f2f696d672e736869656c64732e696f2f3a6c6963656e73652d6d69742d626c75652e7376673f7374796c653d666c61742d737175617265" alt="License" data-canonical-src="http://img.shields.io/:license-mit-blue.svg?style=flat-square" style="max-width:100%;"></a></p>
+## Overview
 
-<ul>
-  <li><strong><a href="http://opensource.org/licenses/mit-license.php" rel="nofollow">MIT license</a></strong></li>
-</ul>  
+
+1. Set credentials  
+Set credentials to make available the API
+
+2. Get code  
+Get the code to work with the API
+
+3. Get all orders  
+Get all the orders from the seller
+
+4. Upload invoice  
+Upload invoice
+
+5. Get shipping details  
+Get shipping details
+
+6. Get billing info  
+Get the information uploaded in an order regarding a buyer's billing data  
+
+
+
+
+----
+### OS
+
+- windows
+- mac
+- linux
+
+### Dependencies
+
+### License
+  
+![MIT](https://camo.githubusercontent.com/107590fac8cbd65071396bb4d04040f76cde5bde/687474703a2f2f696d672e736869656c64732e696f2f3a6c6963656e73652d6d69742d626c75652e7376673f7374796c653d666c61742d737175617265)  
+[MIT](http://opensource.org/licenses/mit-license.ph)
